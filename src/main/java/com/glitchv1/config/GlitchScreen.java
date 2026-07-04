@@ -28,16 +28,6 @@ public class GlitchScreen extends Screen {
             GlitchV1.config.noHurtCam = !GlitchV1.config.noHurtCam;
             button.setMessage(new LiteralText("No Hurt Cam: " + (GlitchV1.config.noHurtCam ? "ON" : "OFF")));
         }));
-        
-        this.addButton(new ButtonWidget(10, 115, 150, 20, new LiteralText("No Totem: " + (GlitchV1.config.noTotemParticles ? "ON" : "OFF")), button -> {
-            GlitchV1.config.noTotemParticles = !GlitchV1.config.noTotemParticles;
-            button.setMessage(new LiteralText("No Totem: " + (GlitchV1.config.noTotemParticles ? "ON" : "OFF")));
-        }));
-        
-        this.addButton(new ButtonWidget(10, 140, 150, 20, new LiteralText("No Break: " + (GlitchV1.config.noBreakParticles ? "ON" : "OFF")), button -> {
-            GlitchV1.config.noBreakParticles = !GlitchV1.config.noBreakParticles;
-            button.setMessage(new LiteralText("No Break: " + (GlitchV1.config.noBreakParticles ? "ON" : "OFF")));
-        }));
     }
     
     @Override
@@ -46,4 +36,4 @@ public class GlitchScreen extends Screen {
         drawCenteredText(matrices, this.textRenderer, "GlitchV1 by @werised", this.width / 2, 15, 0xFF00FF);
         super.render(matrices, mouseX, mouseY, delta);
     }
-                                              }
+}
