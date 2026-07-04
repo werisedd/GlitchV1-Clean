@@ -2,7 +2,6 @@ package com.glitchv1.mixin;
 
 import com.glitchv1.GlitchV1;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -12,8 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinGameRenderer {
     
     @Inject(method = "render", at = @At("HEAD"))
-    private void onRender(MatrixStack matrices, float tickDelta, 
-                         long startTime, boolean tick, CallbackInfo ci) {
+    private void onRender(float tickDelta, long startTime, boolean tick, CallbackInfo ci) {
         if (GlitchV1.config.fullbright) {
             net.minecraft.client.MinecraftClient.getInstance()
                 .options.gamma = GlitchV1.config.gammaValue;
@@ -21,7 +19,7 @@ public class MixinGameRenderer {
     }
     
     @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)
-    private void noHurtCam(MatrixStack matrices, float f, CallbackInfo ci) {
+    private void noHurtCam(float f, CallbackInfo ci) {
         if (GlitchV1.config.noHurtCam) {
             ci.cancel();
         }
