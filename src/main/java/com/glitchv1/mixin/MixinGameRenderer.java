@@ -10,18 +10,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public class MixinGameRenderer {
-    
     @Inject(method = "render", at = @At("HEAD"))
     private void onRender(float tickDelta, long startTime, boolean tick, CallbackInfo ci) {
         if (GlitchV1.config.fullbright) {
             net.minecraft.client.MinecraftClient.getInstance().options.gamma = GlitchV1.config.gammaValue;
         }
     }
-    
     @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)
     private void noHurtCam(MatrixStack matrices, float f, CallbackInfo ci) {
-        if (GlitchV1.config.noHurtCam) {
-            ci.cancel();
-        }
+        if (GlitchV1.config.noHurtCam) ci.cancel();
     }
 }
