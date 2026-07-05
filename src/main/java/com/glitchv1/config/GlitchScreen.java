@@ -1,4 +1,4 @@
-package com.glitchv1.config;
+            package com.glitchv1.config;
 
 import com.glitchv1.GlitchV1;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -10,7 +10,6 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 import java.awt.Color;
 import java.util.Random;
@@ -72,7 +71,6 @@ public class GlitchScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        // Рисуем блюр-фон через градиент
         this.fillGradient(matrices, 0, 0, this.width, this.height, 0xBB0A0A1A, 0xBB050510);
         
         tickCounter++;
@@ -87,7 +85,6 @@ public class GlitchScreen extends Screen {
             glitchActive = false;
         }
 
-        // Заголовок GLITCH VISUALS
         String title = "GLITCH VISUALS";
         int titleColor = Color.HSBtoRGB((tickCounter % 100) / 100f, 0.8f, 1f) | 0xFF000000;
         
@@ -104,26 +101,21 @@ public class GlitchScreen extends Screen {
             this.width / 2f - this.textRenderer.getWidth(title) / 2f + glitchOffsetX,
             10 + glitchOffsetY, titleColor);
         
-        // Версия
         String version = "v1.0 Pro";
         this.textRenderer.drawWithShadow(matrices, version,
             this.width / 2f - this.textRenderer.getWidth(version) / 2f,
             22, 0xFF888888);
         
-        // Линия-разделитель
-        drawHorizontalLine(matrices, 40, this.width - 40, 34, 0x33444466);
+        drawGlitchLine(matrices, 40, this.width - 40, 34, 0x33444466);
         
-        // Рендер кнопок
         super.render(matrices, mouseX, mouseY, delta);
         
-        // Футер
         String footer = "Dev: @werised";
         this.textRenderer.drawWithShadow(matrices, footer,
             this.width / 2f - this.textRenderer.getWidth(footer) / 2f,
             this.height - 14, 0xFF555555);
     }
 
-    // Кастомный класс кнопки с закруглением
     public static class GlitchButton extends ButtonWidget {
         public boolean toggled;
         private String label;
@@ -138,11 +130,9 @@ public class GlitchScreen extends Screen {
         public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
             if (!this.visible) return;
             
-            // Рисуем закруглённый фон кнопки
             int bgColor = this.isHovered() ? 0x55333355 : 0x33222244;
             drawRoundedRect(matrices, this.x, this.y, this.x + this.width, this.y + this.height, 4, bgColor);
             
-            // Текст кнопки
             String displayText = label + ": " + (toggled ? "§aON" : "§cOFF");
             int textColor = toggled ? 0xAAFFAA : 0xFFAAAA;
             MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, displayText,
@@ -150,7 +140,6 @@ public class GlitchScreen extends Screen {
         }
     }
 
-    // Функция рисования закруглённого прямоугольника
     public static void drawRoundedRect(MatrixStack matrices, int left, int top, int right, int bottom, int radius, int color) {
         float a = (color >> 24 & 255) / 255.0F;
         float r = (color >> 16 & 255) / 255.0F;
@@ -187,8 +176,8 @@ public class GlitchScreen extends Screen {
         RenderSystem.disableBlend();
     }
 
-    public static void drawHorizontalLine(MatrixStack matrices, int startX, int endX, int y, int color) {
+    private void drawGlitchLine(MatrixStack matrices, int startX, int endX, int y, int color) {
         if (endX < startX) { int i = startX; startX = endX; endX = i; }
         fill(matrices, startX, y, endX + 1, y + 1, color);
     }
-}
+              }
